@@ -35,6 +35,7 @@ const typeDefs = `
     
     type Query {
         getOneFriend(id: ID): Friend
+        getFriends: [Friend]
         getAliens: [Alien]
 
     }

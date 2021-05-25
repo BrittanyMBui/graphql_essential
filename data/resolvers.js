@@ -11,6 +11,15 @@ export const resolvers = {
                 })
             })
         },
+        getFriends: (() => {
+            return new Promise( (resolve, object) => {
+                Friends.find({}, (err, friends) => {
+                    if (err) console.log(err)
+                    else resolve (friends)
+                })
+            })
+            
+        }),
         getAliens: () => {
             return Aliens.findAll();
         }
