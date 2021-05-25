@@ -1,4 +1,4 @@
-import { Friend } from './dbConnectors';
+import { Friends, Aliens } from './dbConnectors';
 
 // resolver map
 export const resolvers = {
@@ -14,7 +14,10 @@ export const resolvers = {
                 firstName: input.firstName,
                 lastName: input.lastName,
                 gender: input.gender,
+                language: input.language,
+                age: input.age,
                 email: input.email,
+                contacts: input.contacts
             });
 
             newFriend.id = newFriend._id;
@@ -26,5 +29,27 @@ export const resolvers = {
                 });
             })
         },
+        updateFriend: (root, { input }) => {
+            return new Promise(( resolve, object ) => {
+                Friends.findOneAndUpdate({ _id: input.id }, input, { new: true }, (err, friend) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        resolve(friend)
+                    }
+                })
+            })
+        },
+        deleteFriend: (root, { id }) => {
+            return new Promise(( resolve, object ) => {
+                Friends.remove({ _id: id }), (err) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        resolve('Deleted friend')
+                    }
+                }
+            })
+        }
     },
 };
